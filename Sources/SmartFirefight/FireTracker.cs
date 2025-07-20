@@ -17,7 +17,7 @@ public class FireTracker
     private int _maxDistance;
     private int _maxDistancePlusOneSquared;
 
-    public bool IsEnabled { get; set; } = true;
+    public bool IsAutoExtinguishEnabled { get; set; } = true;
 
     public int MaxDistance
     {
@@ -76,7 +76,21 @@ public class FireTracker
         }
     }
 
-    public bool ShouldExtinguish(Fire fire) => IsEnabled && GetFireGropus(fire.Map).Any(fg => fg.HasOverlappedHomeArea && fg.HasFire(fire.Position));
+    public void SetExtinguishDesignation(Fire fire, bool isDesignated)
+    {
+        var list = GetFireGropus(fire.Map);
+        var group = list.FirstOrDefault(fg => fg.HasFire(fire.Position));
+        if (group == null)
+            Log.Warning($"Trying to set designation on untracked fire at {fire.Position} on {fire.Map}.");
+        else if (isDesignated)
+            group.DesignateToExtinguish();
+        else
+            group.RemoveDesignationToExtinguish();
+    }
+
+    public bool ShouldExtinguish(Fire fire) => 
+        IsAutoExtinguishEnabled && GetFireGropus(fire.Map).Any(fg => fg.HasOverlappedHomeArea && fg.HasFire(fire.Position)) ||
+        GetFireGropus(fire.Map).Any(fg => fg.IsDesignatedToExtinguish && fg.HasFire(fire.Position));
 
     private ICollection<FireGroup> GetFireGropus(Map map)
     {
@@ -99,6 +113,15 @@ public class FireTracker
         return list;
     }
 
+    private FireGroup? GetFireGroup(Fire fire)
+    {
+        var list = GetFireGropus(fire.Map);
+        var group = list.FirstOrDefault(fg => fg.HasFire(fire.Position));
+        if (group == null)
+            Log.Warning($"Trying to act on untracked fire at {fire.Position} on {fire.Map}.");
+        return group;
+    }
+
 
     private class FireGroup(FireTracker tracker, Map map)
     {
@@ -109,6 +132,8 @@ public class FireTracker
         // If fire ever touched home area, the whole group should be extinguished.
         public bool HasOverlappedHomeArea { get; private set; }
 
+        public bool IsDesignatedToExtinguish { get; private set; }
+
         public void AddFire(IntVec3 position)
         {
             if (!_positions.Add(position))
@@ -116,6 +141,9 @@ public class FireTracker
 
             if (map.areaManager.Home[position])
                 HasOverlappedHomeArea = true;
+
+            if (IsDesignatedToExtinguish)
+                TryDesignateToExtinguish(position);
         }
 
         public void RemoveFire(IntVec3 position)
@@ -123,12 +151,11 @@ public class FireTracker
             if (!_positions.Remove(position))
                 return;
 
-            //if (map.areaManager.Home[position])
-            //    _homeAreaOverlaps--;
+            if (IsDesignatedToExtinguish)
+                TryRemoveDesignationToExtinguish(position);
         }
 
         public bool HasFire(IntVec3 position) => _positions.Contains(position);
-        
 
         public bool IsNear(IntVec3 position) => _positions.Any(p => (p - position).LengthHorizontalSquared < tracker._maxDistancePlusOneSquared);
 
@@ -136,6 +163,34 @@ public class FireTracker
         {
             _positions.UnionWith(other._positions);
             HasOverlappedHomeArea |= other.HasOverlappedHomeArea;
+
+            if (other.IsDesignatedToExtinguish && !IsDesignatedToExtinguish)
+                DesignateToExtinguish();
         }
+
+        public void DesignateToExtinguish()
+        {
+            IsDesignatedToExtinguish = true;
+
+            foreach (var position in _positions)
+                TryDesignateToExtinguish(position);
+        }
+
+        public void RemoveDesignationToExtinguish()
+        {
+            IsDesignatedToExtinguish = false;
+
+            foreach (var position in _positions)
+                TryRemoveDesignationToExtinguish(position);
+        }
+
+        private void TryDesignateToExtinguish(IntVec3 position)
+        {
+            if (map.designationManager.DesignationOn(map.thingGrid.ThingAt<Fire>(position), SmartFirefightDefs.ExtinguishFiresDesignationDef) == null)
+                    map.designationManager.AddDesignation(new Designation(
+                        map.thingGrid.ThingAt<Fire>(position), SmartFirefightDefs.ExtinguishFiresDesignationDef));
+        }
+        private void TryRemoveDesignationToExtinguish(IntVec3 position) => 
+            map.designationManager.TryRemoveDesignationOn(map.thingGrid.ThingAt<Fire>(position), SmartFirefightDefs.ExtinguishFiresDesignationDef);
     }
 }

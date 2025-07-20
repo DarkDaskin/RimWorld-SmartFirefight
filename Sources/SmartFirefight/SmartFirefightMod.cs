@@ -23,11 +23,8 @@ public class SmartFirefightMod : Mod
 
         listing.CheckboxLabeled(nameof(settings.ExtinguishFiresTouchingHomeArea).Translate(), ref settings.ExtinguishFiresTouchingHomeArea,
             $"{nameof(settings.ExtinguishFiresTouchingHomeArea)}_Desc".Translate());
-        if (settings.ExtinguishFiresTouchingHomeArea)
-        {
-            settings.MaxFireDistance = (int)listing.SliderLabeled($"{nameof(settings.MaxFireDistance).Translate()}: {settings.MaxFireDistance}", 
-                settings.MaxFireDistance, 1, 10, tooltip: $"{nameof(settings.MaxFireDistance)}_Desc".Translate());
-        }
+        settings.MaxFireDistance = (int)listing.SliderLabeled($"{nameof(settings.MaxFireDistance).Translate()}: {settings.MaxFireDistance}", 
+            settings.MaxFireDistance, 1, 10, tooltip: $"{nameof(settings.MaxFireDistance)}_Desc".Translate());
 
         listing.End();
     }
@@ -38,7 +35,7 @@ public class SmartFirefightMod : Mod
 
         var settings = GetSettings<SmartFirefightSettings>();
 
-        FireTracker.Instance.IsEnabled = settings.ExtinguishFiresTouchingHomeArea;
+        FireTracker.Instance.IsAutoExtinguishEnabled = settings.ExtinguishFiresTouchingHomeArea;
         FireTracker.Instance.MaxDistance = settings.MaxFireDistance;
     }
 }
