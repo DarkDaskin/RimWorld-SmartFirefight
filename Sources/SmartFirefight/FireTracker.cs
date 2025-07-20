@@ -13,6 +13,7 @@ public class FireTracker
     public static readonly FireTracker Instance = new();
 
     private readonly Dictionary<Map, List<FireGroup>> _fireGroups = [];
+    private readonly HashSet<Fire> _firesDesignatedToExtinguishWhileLoading = [];
     private int _lastCleanupTick;
     private int _maxDistance;
     private int _maxDistancePlusOneSquared;
@@ -42,14 +43,14 @@ public class FireTracker
         {
             case 0:
                 var newGroup = new FireGroup(this, fire.Map);
-                newGroup.AddFire(fire.Position);
+                AddFireToGroup(newGroup);
                 list.Add(newGroup);
                 break;
             case 1:
-                groups[0].AddFire(fire.Position);
+                AddFireToGroup(groups[0]);
                 break;
             default:
-                groups[0].AddFire(fire.Position);
+                AddFireToGroup(groups[0]);
 
                 for (var i = 1; i < groups.Length; i++)
                 {
@@ -58,6 +59,15 @@ public class FireTracker
                 }
 
                 break;
+        }
+
+
+        void AddFireToGroup(FireGroup group)
+        {
+            group.AddFire(fire.Position);
+            var isDesignatedToExtinguish = _firesDesignatedToExtinguishWhileLoading.Remove(fire);
+            if (isDesignatedToExtinguish)
+                group.DesignateToExtinguish();
         }
     }
 
@@ -78,6 +88,14 @@ public class FireTracker
 
     public void SetExtinguishDesignation(Fire fire, bool isDesignated)
     {
+        if (fire.Map == null)
+        {
+            if (isDesignated)
+                _firesDesignatedToExtinguishWhileLoading.Add(fire);
+
+            return;
+        }
+
         var list = GetFireGropus(fire.Map);
         var group = list.FirstOrDefault(fg => fg.HasFire(fire.Position));
         if (group == null)
