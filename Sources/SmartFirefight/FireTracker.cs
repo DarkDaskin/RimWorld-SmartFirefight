@@ -8,7 +8,7 @@ namespace SmartFirefight;
 public class FireTracker
 {
     private const int CleanupIntervalTicks = 300;
-    private const int DefaultMaxDistance = 2;
+    internal const int DefaultMaxDistance = 2;
 
     public static readonly FireTracker Instance = new();
 
@@ -16,6 +16,8 @@ public class FireTracker
     private int _lastCleanupTick;
     private int _maxDistance;
     private int _maxDistancePlusOneSquared;
+
+    public bool IsEnabled { get; set; } = true;
 
     public int MaxDistance
     {
@@ -74,7 +76,7 @@ public class FireTracker
         }
     }
 
-    public bool ShouldExtinguish(Fire fire) => GetFireGropus(fire.Map).Any(fg => fg.HasOverlappedHomeArea && fg.HasFire(fire.Position));
+    public bool ShouldExtinguish(Fire fire) => IsEnabled && GetFireGropus(fire.Map).Any(fg => fg.HasOverlappedHomeArea && fg.HasFire(fire.Position));
 
     private ICollection<FireGroup> GetFireGropus(Map map)
     {
