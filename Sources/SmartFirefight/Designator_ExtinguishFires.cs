@@ -17,6 +17,8 @@ public class Designator_ExtinguishFires : Designator
         useMouseIcon = true;
         soundDragSustain = SoundDefOf.Designate_DragStandard;
         soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
+        soundSucceeded = SmartFirefightDefs.ExtinguishFiresSoundDef;
+        soundFailed = SoundDefOf.Designate_Failed;
     }
 
     protected override DesignationDef Designation => SmartFirefightDefs.ExtinguishFiresDesignationDef;
