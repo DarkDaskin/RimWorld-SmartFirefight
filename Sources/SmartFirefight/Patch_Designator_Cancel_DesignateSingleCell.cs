@@ -10,7 +10,7 @@ namespace SmartFirefight;
 // ReSharper disable once InconsistentNaming
 [UsedImplicitly]
 [HarmonyPatch(typeof(Designator_Cancel), nameof(Designator_Cancel.DesignateSingleCell))]
-internal class Patch_Designator_Cancel_DesignateSingleCell
+internal static class Patch_Designator_Cancel_DesignateSingleCell
 {
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming

@@ -7,7 +7,7 @@ namespace SmartFirefight;
 
 // ReSharper disable once InconsistentNaming
 [UsedImplicitly]
-[HarmonyPatch(typeof(Designation), "ExposeData")]
+[HarmonyPatch(typeof(Designation), nameof(Designation.ExposeData))]
 internal static class Patch_Designation_ExposeData
 {
     [UsedImplicitly]

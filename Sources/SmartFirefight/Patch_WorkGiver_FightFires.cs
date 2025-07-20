@@ -11,7 +11,7 @@ namespace SmartFirefight;
 // ReSharper disable once InconsistentNaming
 [UsedImplicitly]
 [HarmonyPatch("RimWorld.WorkGiver_FightFires", "HasJobOnThing")]
-internal class Patch_WorkGiver_FightFires
+internal static class Patch_WorkGiver_FightFires
 {
     // ReSharper disable InconsistentNaming
     private static readonly MethodInfo? Thing_Map_get = typeof(Thing).GetProperty(nameof(Thing.Map))?.GetGetMethod();

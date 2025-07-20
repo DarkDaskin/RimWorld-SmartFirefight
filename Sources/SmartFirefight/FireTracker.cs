@@ -131,15 +131,6 @@ public class FireTracker
         return list;
     }
 
-    private FireGroup? GetFireGroup(Fire fire)
-    {
-        var list = GetFireGropus(fire.Map);
-        var group = list.FirstOrDefault(fg => fg.HasFire(fire.Position));
-        if (group == null)
-            Log.Warning($"Trying to act on untracked fire at {fire.Position} on {fire.Map}.");
-        return group;
-    }
-
 
     private class FireGroup(FireTracker tracker, Map map)
     {

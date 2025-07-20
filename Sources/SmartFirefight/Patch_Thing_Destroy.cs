@@ -8,7 +8,7 @@ namespace SmartFirefight;
 // ReSharper disable once InconsistentNaming
 [UsedImplicitly]
 [HarmonyPatch(typeof(Thing), nameof(Thing.Destroy))]
-internal class Patch_Thing_Destroy
+internal static class Patch_Thing_Destroy
 {
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
