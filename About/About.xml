@@ -5,8 +5,8 @@
   <author>Dark Daskin</author>
   <description>
     Firefighting imrovements:
-    - Fight fire around home area automatically when needed.
-    - Fight fire order for mass extinguishing without need to extend home area.
+    - Extinguish fire around home area automatically when needed.
+    - Extinguish fires order for mass extinguishing without need to extend home area.
   </description>
   <supportedVersions>
     <li>1.6</li>
