@@ -22,7 +22,7 @@ internal class Patch_WorkGiver_FightFires
     // ReSharper restore InconsistentNaming
 
     private static readonly object?[] AllAccessedMembers = [Thing_Map_get, Map_areaManager, AreaManager_Home_get, Thing_Position_get, Area_Item_get];
-
+    
     [UsedImplicitly]
     public static bool Prepare() => AllAccessedMembers.All(o => o != null);
 
@@ -40,11 +40,11 @@ internal class Patch_WorkGiver_FightFires
         ], [
             CodeInstruction.LoadArgument(1),
             CodeInstruction.LoadArgument(2),
-            CodeInstruction.Call(typeof(Patch_WorkGiver_FightFires), nameof(IsAtHomeAreaOrNearby)),
+            CodeInstruction.Call(typeof(Patch_WorkGiver_FightFires), nameof(IsAtHomeAreaOrConnected)),
         ]);
     }
 
-    private static bool IsAtHomeAreaOrNearby(Pawn pawn, Thing thing)
+    private static bool IsAtHomeAreaOrConnected(Pawn pawn, Thing thing)
     {
         if (thing is not Fire fire)
             return false;
@@ -52,9 +52,6 @@ internal class Patch_WorkGiver_FightFires
         if (pawn.Map.areaManager.Home[fire.Position])
             return true;
 
-        // TODO: get all fires that can reach home
-
-        var isFireNear = fire.Position.GetFiresNearCell(pawn.Map).Any(nearbyFire => pawn.Map.areaManager.Home[nearbyFire.Position]);
-        return isFireNear;
+        return FireTracker.Instance.ShouldExtinguish(fire);
     }
 }
