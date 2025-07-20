@@ -1,4 +1,6 @@
 # Smart Firefight
+[![Steam](https://img.shields.io/badge/steam-%23000000.svg?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/sharedfiles/filedetails/?id=3530229241)
+
 ![Preview](About/Preview.png)
 
 This RimWorld mod brings in the following firefighting imrovements:
