@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SettingsCategory>Smart Firefight</SettingsCategory>
+  <ExtinguishFiresTouchingHomeArea>Тушить огонь, касающийся домашней области</ExtinguishFiresTouchingHomeArea>
+  <ExtinguishFiresTouchingHomeArea_Desc>Когда группа очагов огня растпространяется на домашнюю область, тушить её целиком</ExtinguishFiresTouchingHomeArea_Desc>
+  <MaxFireDistance>Максимальное расстояние между очагами огня</MaxFireDistance>
+  <MaxFireDistance_Desc>Максимальное расстояние между очагами огня, которые будут считаться частью одной группы</MaxFireDistance_Desc>
+</LanguageData>
