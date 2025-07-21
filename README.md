@@ -14,6 +14,10 @@ This RimWorld mod brings in the following firefighting imrovements:
 - English
 - Russian
 
+## FAQ
+**Q**: Is this mod save game compatible?  
+**A**: The mod can be safely added to existing games. The mod can be removed from existing games as long as there are no active *Extinguish Fires* orders present.
+
 ---
 
 Built with [Unity Mod Studio](https://marketplace.visualstudio.com/items?itemName=darkdaskin.UnityModStudio2022).
