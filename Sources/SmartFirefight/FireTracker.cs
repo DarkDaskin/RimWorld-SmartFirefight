@@ -18,7 +18,7 @@ public class FireTracker
     private int _maxDistance;
     private int _maxDistancePlusOneSquared;
 
-    public bool IsAutoExtinguishEnabled { get; set; } = true;
+    public bool IsAutoExtinguishEnabled { get; set; }
 
     public int MaxDistance
     {
@@ -32,7 +32,9 @@ public class FireTracker
     }
     public FireTracker()
     {
-        MaxDistance = DefaultMaxDistance;
+        var settings = LoadedModManager.GetMod<SmartFirefightMod>().GetSettings<SmartFirefightSettings>();
+        IsAutoExtinguishEnabled = settings.ExtinguishFiresTouchingHomeArea;
+        MaxDistance = settings.MaxFireDistance;
     }
 
     public void AddFire(Fire fire)
