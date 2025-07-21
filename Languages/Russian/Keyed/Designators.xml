@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <ExtinguishFires>Потушить огонь</ExtinguishFires>
-  <ExtinguishFires_Desc>Потушить выбранные очаги огня, а также все очаги огня, связанные с ними.</ExtinguishFires_Desc>
+  <SmartFirefight.ExtinguishFires>Потушить огонь</SmartFirefight.ExtinguishFires>
+  <SmartFirefight.ExtinguishFires_Desc>Потушить выбранные очаги огня, а также все очаги огня, связанные с ними.</SmartFirefight.ExtinguishFires_Desc>
 </LanguageData>

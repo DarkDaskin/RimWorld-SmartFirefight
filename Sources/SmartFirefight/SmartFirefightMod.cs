@@ -12,7 +12,7 @@ public class SmartFirefightMod : Mod
         GetSettings<SmartFirefightSettings>();
     }
 
-    public override string SettingsCategory() => nameof(SettingsCategory).Translate();
+    public override string SettingsCategory() => nameof(SettingsCategory).TranslateNS();
 
     public override void DoSettingsWindowContents(Rect inRect)
     {
@@ -21,10 +21,10 @@ public class SmartFirefightMod : Mod
         var listing = new Listing_Standard();
         listing.Begin(inRect);
 
-        listing.CheckboxLabeled(nameof(settings.ExtinguishFiresTouchingHomeArea).Translate(), ref settings.ExtinguishFiresTouchingHomeArea,
-            $"{nameof(settings.ExtinguishFiresTouchingHomeArea)}_Desc".Translate());
-        settings.MaxFireDistance = (int)listing.SliderLabeled($"{nameof(settings.MaxFireDistance).Translate()}: {settings.MaxFireDistance}", 
-            settings.MaxFireDistance, 1, 10, tooltip: $"{nameof(settings.MaxFireDistance)}_Desc".Translate());
+        listing.CheckboxLabeled(nameof(settings.ExtinguishFiresTouchingHomeArea).TranslateNS(), ref settings.ExtinguishFiresTouchingHomeArea,
+            $"{nameof(settings.ExtinguishFiresTouchingHomeArea)}_Desc".TranslateNS());
+        settings.MaxFireDistance = (int)listing.SliderLabeled($"{nameof(settings.MaxFireDistance).TranslateNS()}: {settings.MaxFireDistance}", 
+            settings.MaxFireDistance, 1, 10, tooltip: $"{nameof(settings.MaxFireDistance)}_Desc".TranslateNS());
 
         listing.End();
     }

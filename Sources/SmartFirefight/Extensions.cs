@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
+using Verse;
 
 namespace SmartFirefight;
 
-internal static class Utils
+internal static class Extensions
 {
     public static IEnumerable<CodeInstruction> ReplaceInstructions(this IEnumerable<CodeInstruction> instructions, 
         IReadOnlyList<Func<CodeInstruction, bool>> predicates, IReadOnlyList<CodeInstruction> replacements)
@@ -49,4 +50,6 @@ internal static class Utils
             yield return instruction;
         }
     }
+
+    public static TaggedString TranslateNS(this string key) => $"{nameof(SmartFirefight)}.{key}".Translate();
 }

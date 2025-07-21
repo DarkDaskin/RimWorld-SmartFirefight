@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <ExtinguishFires>Extinguish Fires</ExtinguishFires>
-  <ExtinguishFires_Desc>Extinguish selected fires and all fires connected to them.</ExtinguishFires_Desc>
+  <SmartFirefight.ExtinguishFires>Extinguish Fires</SmartFirefight.ExtinguishFires>
+  <SmartFirefight.ExtinguishFires_Desc>Extinguish selected fires and all fires connected to them.</SmartFirefight.ExtinguishFires_Desc>
 </LanguageData>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <SettingsCategory>Smart Firefight</SettingsCategory>
-  <ExtinguishFiresTouchingHomeArea>Extinguish fires touching home area</ExtinguishFiresTouchingHomeArea>
-  <ExtinguishFiresTouchingHomeArea_Desc>When a group of fires expands into home area, extinguish it all</ExtinguishFiresTouchingHomeArea_Desc>
-  <MaxFireDistance>Maximum distance between fires</MaxFireDistance>
-  <MaxFireDistance_Desc>Maximum distance between fires to be considered a part of the same fire group</MaxFireDistance_Desc>
+  <SmartFirefight.SettingsCategory>Smart Firefight</SmartFirefight.SettingsCategory>
+  <SmartFirefight.ExtinguishFiresTouchingHomeArea>Extinguish fires touching home area</SmartFirefight.ExtinguishFiresTouchingHomeArea>
+  <SmartFirefight.ExtinguishFiresTouchingHomeArea_Desc>When a group of fires expands into home area, extinguish it all</SmartFirefight.ExtinguishFiresTouchingHomeArea_Desc>
+  <SmartFirefight.MaxFireDistance>Maximum distance between fires</SmartFirefight.MaxFireDistance>
+  <SmartFirefight.MaxFireDistance_Desc>Maximum distance between fires to be considered a part of the same fire group</SmartFirefight.MaxFireDistance_Desc>
 </LanguageData>

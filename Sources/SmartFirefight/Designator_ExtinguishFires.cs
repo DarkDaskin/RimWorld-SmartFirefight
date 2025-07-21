@@ -11,8 +11,8 @@ public class Designator_ExtinguishFires : Designator
 {
     public Designator_ExtinguishFires()
     {
-        defaultLabel = "ExtinguishFires".Translate();
-        defaultDesc = "ExtinguishFires_Desc".Translate();
+        defaultLabel = "ExtinguishFires".TranslateNS();
+        defaultDesc = "ExtinguishFires_Desc".TranslateNS();
         icon = ContentFinder<Texture2D>.Get("Designator_ExtinguishFires");
         useMouseIcon = true;
         soundDragSustain = SoundDefOf.Designate_DragStandard;
